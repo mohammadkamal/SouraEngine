@@ -1,0 +1,7 @@
+﻿  Renderer2D.cpp
+  Shader.cpp
+d:\work\programming projects\souraengine\souraengine\shader.cpp(63): warning C4244: 'initializing': conversion from 'std::streamoff' to 'size_t', possible loss of data
+  Texture2D.cpp
+  Window.cpp
+  Generating Code...
+  SouraEngine.vcxproj -> D:\Work\Programming Projects\SouraEngine\Debug\SouraEngine.exe
