@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "Renderer2D.h"
+#include "Renderer/Renderer2D.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
