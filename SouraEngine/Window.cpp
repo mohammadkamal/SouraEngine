@@ -2,11 +2,22 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Renderer/Renderer2D.h"
+#include "Renderer/Camera.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 const unsigned int SCREEN_WIDTH = 800;
 const unsigned int SCREEN_HEIGHT = 600;
+
+//Camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = SCREEN_WIDTH / 2.0f;
+float lastY = SCREEN_HEIGHT / 2.0f;
+bool firstMouse = true;
+
+// timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 int main()
 {
@@ -43,6 +54,13 @@ int main()
 	while (true)
 	{
 		texture.Bind(GL_TEXTURE_2D);
+
+		/*glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 view = camera.GetViewMatrix();
+		simpleShader.UploadUniformMat4("projection", projection);
+		simpleShader.UploadUniformMat4("view", view);
+		glm::mat4 model = glm::mat4(1.0f);
+		simpleShader.UploadUniformMat4("model", model);*/
 
 		//ren2D.DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
 
