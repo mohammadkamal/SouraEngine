@@ -42,11 +42,15 @@ int main()
 		return -1;
 	}
 
-	Shader simpleShader("Assets/Shaders/Texture.shader");
+	glEnable(GL_DEPTH_TEST);
+
+	Shader simpleShader("Assets/Shaders/Simple.shader");
 	Texture2D texture("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
 
 	Renderer2D ren2D;
 	ren2D.Init();
+
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	simpleShader.use();
 	glUniform1i(glGetUniformLocation(simpleShader.ID, "texture1"), 0);
@@ -55,16 +59,17 @@ int main()
 	{
 		texture.Bind(GL_TEXTURE_2D);
 
-		/*glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		simpleShader.UploadUniformMat4("projection", projection);
 		simpleShader.UploadUniformMat4("view", view);
 		glm::mat4 model = glm::mat4(1.0f);
-		simpleShader.UploadUniformMat4("model", model);*/
+		simpleShader.UploadUniformMat4("model", model);
 
 		//ren2D.DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
 
-		ren2D.DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+		//ren2D.DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+		ren2D.DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f);
 		
 
 		glfwSwapBuffers(window);

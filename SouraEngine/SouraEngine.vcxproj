@@ -138,11 +138,13 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer\Camera.cpp" />
     <ClCompile Include="Renderer\Renderer2D.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture2D.cpp" />
     <ClCompile Include="Utilities\FileSystem.cpp" />
+    <ClCompile Include="UI\Wajeha.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +154,7 @@
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture2D.h" />
     <ClInclude Include="Utilities\FileSystem.h" />
+    <ClInclude Include="UI\Wajeha.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Camera.shader" />

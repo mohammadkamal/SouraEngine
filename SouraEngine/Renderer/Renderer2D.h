@@ -26,6 +26,10 @@ public:
 	//Quads
 	void DrawQuad(glm::vec2 position, glm::vec2 size, glm::vec3 color);
 	void DrawQuad(glm::vec2 position, glm::vec2 size, glm::vec3 color, float rotation);
+	void DrawQuad(glm::vec3 position, glm::vec2 size, glm::vec3 color);
+
+	//Cubes
+	void DrawCube(glm::vec3 position, float length);
 
 private:
 	unsigned int vertexBufferObject, vertexArrayObject, elementBufferObject;
