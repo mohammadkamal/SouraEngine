@@ -6,13 +6,18 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "Window.h"
 #include "Shader.h"
 #include "Texture2D.h"
+#include "Camera.h"
 
 class Renderer2D
 {
 public:
+	Renderer2D();
+
 	void Init();
+	void OnUpdate();
 	void Shutdown();
 
 	//Utilites
@@ -34,4 +39,9 @@ public:
 private:
 	unsigned int vertexBufferObject, vertexArrayObject, elementBufferObject;
 	static std::shared_ptr<Shader> shader;
+
+	GLFWwindow* m_Window;
+	Shader m_Shader;
+	Texture2D m_Texture2D;
+	Camera m_Camera;
 };

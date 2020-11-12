@@ -20,6 +20,7 @@ public:
 	uint32_t ID;
 
 	// constructor reads and builds the shader
+	Shader() = default;
 	Shader(const std::string& filepath);
 
 	//static std::shared_ptr<Shader> Create(const std::string& filepath);

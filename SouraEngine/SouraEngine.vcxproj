@@ -83,7 +83,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>includes\glm;includes\assimp;includes\glad;includes\GLFW;includes\stb_image;includes\KHR;includes\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>includes\glm;includes\assimp;includes\glad;includes\GLFW;includes\stb_image;includes\KHR;includes\GL;Core;Renderer;lib;Utilities;UI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -110,7 +110,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>includes\glm;includes\assimp;includes\glad;includes\GLFW;includes\stb_image;includes\KHR;includes\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>includes\glm;includes\assimp;includes\glad;includes\GLFW;includes\stb_image;includes\KHR;includes\GL;Core;Renderer;lib;Utilities;UI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,7 +146,6 @@
     <ClCompile Include="Renderer\Texture2D.cpp" />
     <ClCompile Include="Utilities\FileSystem.cpp" />
     <ClCompile Include="UI\Wajeha.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\Camera.h" />
@@ -155,6 +155,7 @@
     <ClInclude Include="Renderer\Texture2D.h" />
     <ClInclude Include="Utilities\FileSystem.h" />
     <ClInclude Include="UI\Wajeha.h" />
+    <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Camera.shader" />

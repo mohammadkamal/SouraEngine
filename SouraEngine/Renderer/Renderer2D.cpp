@@ -1,14 +1,57 @@
 #include "Renderer2D.h"
 
+Renderer2D::Renderer2D()
+{
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+}
+
 void Renderer2D::Init()
 {
-	//shader = Shader::Create("Assets/Shaders/Simple.shader");
+	m_Window = Window::Create("SouraEngine", 1280, 720);
+
+	glEnable(GL_DEPTH_TEST);
+
+	m_Shader = Shader("Assets/Shaders/Simple.shader");
+	m_Texture2D = Texture2D("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	m_Shader.use();
+	glUniform1i(glGetUniformLocation(m_Shader.ID, "texture1"), 0);
+	m_Camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+}
+
+void Renderer2D::OnUpdate()
+{
+	m_Texture2D.Bind(GL_TEXTURE_2D);
+
+	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
+	glm::mat4 view = m_Camera.GetViewMatrix();
+	m_Shader.UploadUniformMat4("projection", projection);
+	m_Shader.UploadUniformMat4("view", view);
+	glm::mat4 model = glm::mat4(1.0f);
+	m_Shader.UploadUniformMat4("model", model);
+
+	//DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
+
+	//DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+	DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f);
+
+
+	glfwSwapBuffers(m_Window);
+	glfwPollEvents();
 }
 
 void Renderer2D::Shutdown()
 {
 	glDeleteVertexArrays(1, &vertexArrayObject);
 	glDeleteBuffers(1, &vertexBufferObject);
+
+	//glfwTerminate();
+
 }
 
 void Renderer2D::LoadShader(const std::string & filepath)
