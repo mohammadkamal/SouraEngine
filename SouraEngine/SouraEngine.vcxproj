@@ -144,6 +144,7 @@
     <ClCompile Include="Renderer\Renderer2D.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture2D.cpp" />
+    <ClCompile Include="Renderer\VertexArray.cpp" />
     <ClCompile Include="Utilities\FileSystem.cpp" />
     <ClCompile Include="UI\Wajeha.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="Renderer\Renderer2D.h" />
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture2D.h" />
+    <ClInclude Include="Renderer\VertexArray.h" />
     <ClInclude Include="Utilities\FileSystem.h" />
     <ClInclude Include="UI\Wajeha.h" />
     <ClInclude Include="Core\Window.h" />

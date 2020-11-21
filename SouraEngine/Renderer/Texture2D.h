@@ -4,15 +4,17 @@
 #include <iostream>
 #include "Shader.h"
 
-class Texture2D
+namespace SouraEngine
 {
-public:
-	Texture2D() = default;
-	Texture2D(const std::string& path);
-	~Texture2D();
+	class Texture2D
+	{
+	public:
+		Texture2D(const std::string& path);
+		~Texture2D();
 
-	void Bind(uint32_t slot);
+		void Bind(uint32_t slot);
 
-private:
-	unsigned int texture;
-};
+	private:
+		unsigned int texture;
+	};
+}
