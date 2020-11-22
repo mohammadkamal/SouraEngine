@@ -141,20 +141,24 @@
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer\Camera.cpp" />
+    <ClCompile Include="Renderer\IndexBuffer.cpp" />
     <ClCompile Include="Renderer\Renderer2D.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture2D.cpp" />
     <ClCompile Include="Renderer\VertexArray.cpp" />
+    <ClCompile Include="Renderer\VertexBuffer.cpp" />
     <ClCompile Include="Utilities\FileSystem.cpp" />
     <ClCompile Include="UI\Wajeha.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="includes\stb_image\stb_image.h" />
+    <ClInclude Include="Renderer\IndexBuffer.h" />
     <ClInclude Include="Renderer\Renderer2D.h" />
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture2D.h" />
     <ClInclude Include="Renderer\VertexArray.h" />
+    <ClInclude Include="Renderer\VertexBuffer.h" />
     <ClInclude Include="Utilities\FileSystem.h" />
     <ClInclude Include="UI\Wajeha.h" />
     <ClInclude Include="Core\Window.h" />

@@ -13,6 +13,8 @@
 #include "Texture2D.h"
 #include "Camera.h"
 #include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 namespace SouraEngine
 {
@@ -57,6 +59,8 @@ namespace SouraEngine
 		//Camera m_Camera;
 
 		//std::shared_ptr<VertexArray> m_VertexArray;
+		//std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		//std::shared_ptr<IndexBuffer> m_IndexBuffer;
 	};
 
 }

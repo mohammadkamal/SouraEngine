@@ -8,10 +8,8 @@ namespace SouraEngine
 	std::shared_ptr<Texture2D> s_Texture2D;
 	std::shared_ptr<Camera> s_Camera;
 	std::shared_ptr<VertexArray> m_VertexArray;
-
-	static unsigned int vertexBufferObject, elementBufferObject;
-	static std::array<float, 32> m_Vertices;
-	static std::array<unsigned int, 6> m_Indices;
+	std::shared_ptr<VertexBuffer> m_VertexBuffer;
+	std::shared_ptr<IndexBuffer> m_IndexBuffer;
 
 	void Renderer2D::Init()
 	{
@@ -57,9 +55,9 @@ namespace SouraEngine
 		glm::mat4 model = glm::mat4(1.0f);
 		s_Shader->UploadUniformMat4("model", model);*/
 
-		DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
+		//DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
 
-		//DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+		DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
 		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f);
 
 
@@ -69,11 +67,9 @@ namespace SouraEngine
 
 	void Renderer2D::Shutdown()
 	{
-		//delete &m_Vertices, &m_Indices;
-		//glDeleteVertexArrays(1, &vertexArrayObject);
 		m_VertexArray->~VertexArray();
-		glDeleteBuffers(1, &vertexBufferObject);
-		glDeleteBuffers(1, &elementBufferObject);
+		m_VertexBuffer->~VertexBuffer();
+		m_IndexBuffer->~IndexBuffer();
 
 		glfwTerminate();
 	}
@@ -93,13 +89,12 @@ namespace SouraEngine
 		};
 
 		m_VertexArray = std::make_shared<VertexArray>();
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
 
-		glGenBuffers(1, &vertexBufferObject);
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verticesAlt), verticesAlt, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -119,12 +114,11 @@ namespace SouraEngine
 		};
 
 		m_VertexArray = std::make_shared<VertexArray>();
-		glGenBuffers(1, &vertexBufferObject);
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verticesAlt), verticesAlt, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -147,13 +141,12 @@ namespace SouraEngine
 		};
 
 		m_VertexArray = std::make_shared<VertexArray>();
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
 
-		glGenBuffers(1, &vertexBufferObject);
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verticesAlt), verticesAlt, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -171,7 +164,8 @@ namespace SouraEngine
 
 	void Renderer2D::DrawQuad(glm::vec2 position, glm::vec2 size, glm::vec3 color)
 	{
-		m_Vertices =
+
+		float verticesAlt[] =
 		{   //Points                      //Colors             //TexCoords
 			position.x, position.y, 0.0f, color.x, 0.0f, 0.0f, 1.0f, 1.0f,
 			position.x, position.y - size.y, 0.0f, 0.0f, color.y, 0.0f, 1.0f, 0.0f,
@@ -179,19 +173,17 @@ namespace SouraEngine
 			position.x - size.x, position.y, 0.0f, color.x, color.y, 0.0f, 0.0f, 1.0f
 		};
 
-		m_Indices = { 0, 1, 3, 1, 2, 3 };
+		unsigned int indicesAlt[] = { 0, 1, 3, 1, 2, 3 };
 
 		m_VertexArray = std::make_shared<VertexArray>();
-		glGenBuffers(1, &vertexBufferObject);
-		glGenBuffers(1, &elementBufferObject);
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_IndexBuffer = std::make_shared<IndexBuffer>();
 
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(m_Vertices), &m_Vertices, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObject);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_Indices), &m_Indices, GL_STATIC_DRAW);
+		m_IndexBuffer->SetData(indicesAlt, sizeof(indicesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -230,16 +222,14 @@ namespace SouraEngine
 		unsigned int indices[] = { 0, 1, 3, 1, 2, 3 };
 
 		m_VertexArray = std::make_shared<VertexArray>();
-		glGenBuffers(1, &vertexBufferObject);
-		glGenBuffers(1, &elementBufferObject);
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_IndexBuffer = std::make_shared<IndexBuffer>();
 
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verticesAlt), verticesAlt, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt,sizeof(verticesAlt));
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObject);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		m_IndexBuffer->SetData(indices, sizeof(indices));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -309,12 +299,11 @@ namespace SouraEngine
 		};
 
 		m_VertexArray = std::make_shared<VertexArray>();
-		glGenBuffers(1, &vertexBufferObject);
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
 
 		m_VertexArray->Bind();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verticesAlt), verticesAlt, GL_STATIC_DRAW);
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
