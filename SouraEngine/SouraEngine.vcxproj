@@ -70,11 +70,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Work\Programming Projects\SouraEngine\SouraEngine\includes;D:\Work\Programming Projects\SouraEngine\SouraEngine;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Work\Programming Projects\SouraEngine\SouraEngine\includes;D:\Work\Programming Projects\SouraEngine\SouraEngine\;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Work\Programming Projects\SouraEngine\SouraEngine\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Work\Programming Projects\SouraEngine\SouraEngine\includes;D:\Work\Programming Projects\SouraEngine\SouraEngine;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Work\Programming Projects\SouraEngine\SouraEngine\includes;D:\Work\Programming Projects\SouraEngine\SouraEngine\;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Work\Programming Projects\SouraEngine\SouraEngine\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -136,11 +136,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer\Camera.cpp" />
+    <ClCompile Include="Renderer\GraphicsContext.cpp" />
     <ClCompile Include="Renderer\IndexBuffer.cpp" />
     <ClCompile Include="Renderer\Renderer2D.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
@@ -151,8 +153,11 @@
     <ClCompile Include="UI\Wajeha.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Transform.h" />
+    <ClInclude Include="Core\Input.h" />
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="includes\stb_image\stb_image.h" />
+    <ClInclude Include="Renderer\GraphicsContext.h" />
     <ClInclude Include="Renderer\IndexBuffer.h" />
     <ClInclude Include="Renderer\Renderer2D.h" />
     <ClInclude Include="Renderer\Shader.h" />
@@ -165,6 +170,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Camera.shader" />
+    <None Include="Assets\Shaders\Color.shader" />
+    <None Include="Assets\Shaders\Light.shader" />
     <None Include="Assets\Shaders\Simple.shader" />
     <None Include="Assets\Shaders\Texture.shader" />
   </ItemGroup>

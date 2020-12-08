@@ -22,7 +22,8 @@ namespace SouraEngine
 
 	glm::mat4 Camera::GetViewMatrix()
 	{
-		return glm::lookAt(Position, Position + Front, Up);
+		m_ViewMatrix = glm::lookAt(Position, Position + Front, Up);
+		return m_ViewMatrix;
 	}
 
 	void Camera::ProcessKeyboard(CameraMovement direction, float deltaTime)

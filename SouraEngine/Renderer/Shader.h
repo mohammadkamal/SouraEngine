@@ -19,25 +19,27 @@ namespace SouraEngine
 	class Shader
 	{
 	public:
-		// the program ID
-		uint32_t ID;
-
 		// constructor reads and builds the shader
+		Shader() = default;
 		Shader(const std::string& filepath);
+		~Shader();
 
-		void use();
+		void Bind();
+		void Unbind();
 
 		// utility uniform functions
-		void setBool(const std::string &name, bool value) const;
-		void setInt(const std::string &name, int value) const;
-		void setFloat(const std::string &name, float value) const;
+		void SetBool(const std::string &name, bool value) const;
 
-		void setVec2(const std::string &name, glm::vec2 &value) const;
-		void setVec2(const std::string &name, float x, float y) const;
-		void setVec3(const std::string &name, glm::vec3 &value) const;
-		void setVec3(const std::string &name, float x, float y, float z) const;
-		void setVec4(const std::string &name, glm::vec4 &value) const;
-		void setVec4(const std::string &name, float x, float y, float z, float w) const;
+		void SetInt(const std::string &name, int value) const;
+		void SetIntArray(const std::string &name, int* values, uint32_t count) const;
+
+		void SetFloat(const std::string &name, float value) const;
+		void SetFloat2(const std::string &name, const glm::vec2& value);
+		void SetFloat2(const std::string &name, float x, float y);
+		void SetFloat3(const std::string &name, const glm::vec3& value);
+		void SetFloat3(const std::string &name, float x, float y, float z);
+		void SetFloat4(const std::string &name, const glm::vec4& value);
+		void SetFloat4(const std::string &name, float x, float y, float z, float w);
 
 		void UploadUniformMat2(const std::string &name, const glm::mat2& matrix);
 		void UploadUniformMat3(const std::string &name, const glm::mat3& matrix);
@@ -47,5 +49,7 @@ namespace SouraEngine
 		std::string ReadFile(const std::string& filepath);
 		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
+
+		uint32_t m_RendererID; //Program ID
 	};
 }

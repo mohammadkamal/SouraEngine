@@ -20,71 +20,86 @@ namespace SouraEngine
 		Compile(shaderSources);
 	}
 
-	void Shader::use()
+	Shader::~Shader()
 	{
-		glUseProgram(ID);
+		glDeleteProgram(m_RendererID);
 	}
 
-	void Shader::setBool(const std::string & name, bool value) const
+	void Shader::Bind()
 	{
-		glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+		glUseProgram(m_RendererID);
 	}
 
-	void Shader::setInt(const std::string & name, int value) const
+	void Shader::Unbind()
 	{
-		glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+		glUseProgram(0);
 	}
 
-	void Shader::setFloat(const std::string & name, float value) const
+	void Shader::SetBool(const std::string & name, bool value) const
 	{
-		glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+		glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), (int)value);
 	}
 
-	void Shader::setVec2(const std::string & name, glm::vec2 & value) const
+	void Shader::SetInt(const std::string & name, int value) const
 	{
-		glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+		glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-	void Shader::setVec2(const std::string & name, float x, float y) const
+	void Shader::SetIntArray(const std::string & name, int * values, uint32_t count) const
 	{
-		glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y);
+		glUniform1iv(glGetUniformLocation(m_RendererID, name.c_str()), count, values);
 	}
 
-	void Shader::setVec3(const std::string & name, glm::vec3 & value) const
+	void Shader::SetFloat(const std::string & name, float value) const
 	{
-		glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+		glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-	void Shader::setVec3(const std::string & name, float x, float y, float z) const
+	void Shader::SetFloat2(const std::string & name, const glm::vec2 & value)
 	{
-		glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
+		glUniform2fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, &value[0]);
 	}
 
-	void Shader::setVec4(const std::string & name, glm::vec4 & value) const
+	void Shader::SetFloat2(const std::string & name, float x, float y)
 	{
-		glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+		glUniform2f(glGetUniformLocation(m_RendererID, name.c_str()), x, y);
 	}
 
-	void Shader::setVec4(const std::string & name, float x, float y, float z, float w) const
+	void Shader::SetFloat3(const std::string & name, const glm::vec3 & value)
 	{
-		glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w);
+		glUniform3fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, &value[0]);
+	}
+
+	void Shader::SetFloat3(const std::string & name, float x, float y, float z)
+	{
+		glUniform3f(glGetUniformLocation(m_RendererID, name.c_str()), x, y, z);
+	}
+
+	void Shader::SetFloat4(const std::string & name, const glm::vec4 & value)
+	{
+		glUniform4fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, &value[0]);
+	}
+
+	void Shader::SetFloat4(const std::string & name, float x, float y, float z, float w)
+	{
+		glUniform4f(glGetUniformLocation(m_RendererID, name.c_str()), x, y, z, w);
 	}
 
 	void Shader::UploadUniformMat2(const std::string & name, const glm::mat2 & matrix)
 	{
-		unsigned int location = glGetUniformLocation(ID, name.c_str());
+		unsigned int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix2fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 	void Shader::UploadUniformMat3(const std::string & name, const glm::mat3 & matrix)
 	{
-		unsigned int location = glGetUniformLocation(ID, name.c_str());
+		unsigned int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 	void Shader::UploadUniformMat4(const std::string & name, const glm::mat4 & matrix)
 	{
-		unsigned int location = glGetUniformLocation(ID, name.c_str());
+		unsigned int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
@@ -172,7 +187,7 @@ namespace SouraEngine
 			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
-		ID = program;
+		m_RendererID = program;
 
 		// Link our program
 		glLinkProgram(program);

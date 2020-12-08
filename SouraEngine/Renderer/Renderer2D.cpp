@@ -2,67 +2,71 @@
 
 namespace SouraEngine
 {
-	//To be solved
-	GLFWwindow* m_Window;
-	std::shared_ptr<Shader> s_Shader;
-	std::shared_ptr<Texture2D> s_Texture2D;
-	std::shared_ptr<Camera> s_Camera;
-	std::shared_ptr<VertexArray> m_VertexArray;
-	std::shared_ptr<VertexBuffer> m_VertexBuffer;
-	std::shared_ptr<IndexBuffer> m_IndexBuffer;
 
-	void Renderer2D::Init()
+	Renderer2D::Renderer2D()
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	}
 
-		//m_Window = std::make_unique<GLFWwindow>(Window::Create("SouraEngine", 1280, 720));
-		m_Window = Window::Create("SouraEngine", 1280, 720);
+	void Renderer2D::Init()
+	{
+		u_Window = std::make_unique<Window>("SouraEngine", 1280, 720);
+		glfwSetFramebufferSizeCallback(u_Window->GetNativeWindow(), Window::framebufferSizeCallback);
 
 		glEnable(GL_DEPTH_TEST);
 
-		s_Shader = std::make_shared<Shader>("Assets/Shaders/Simple.shader");
+		s_Shader = std::make_shared<Shader>("Assets/Shaders/Camera.shader");
+		m_LightShader = std::make_shared<Shader>("Assets/Shaders/Light.shader");
+		m_CubeShader = std::make_shared<Shader>("Assets/Shaders/Texture.shader");
+		m_LightCubeShader = std::make_shared<Shader>("Assets/Shaders/Color.shader");
 		s_Texture2D = std::make_shared<Texture2D>("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
 
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		s_Shader->use();
-		glUniform1i(glGetUniformLocation(s_Shader->ID, "texture1"), 0);
+		m_LightCubeShader->Bind();
+		m_LightShader->Bind();
+
+		//s_Shader->Bind();
+		//s_Shader->SetInt("texture1", 0);
 		s_Camera = std::make_shared<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
-
-		//From Update
-		s_Texture2D->Bind(GL_TEXTURE_2D);
-
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
-		glm::mat4 view = s_Camera->GetViewMatrix();
-		s_Shader->UploadUniformMat4("projection", projection);
-		s_Shader->UploadUniformMat4("view", view);
-		glm::mat4 model = glm::mat4(1.0f);
-		s_Shader->UploadUniformMat4("model", model);
-		
+		m_Transform = std::make_unique<Transform>(glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec3(1.0f), glm::vec3(1.0f));
 	}
 
 	void Renderer2D::OnUpdate()
 	{
-		/*s_Texture2D->Bind(GL_TEXTURE_2D);
+		//s_Texture2D->Bind(GL_TEXTURE_2D);
 
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(-45.0f), (float)u_Window->GetWidth() / (float)u_Window->GetHeight(), 0.1f, 100.0f);
 		glm::mat4 view = s_Camera->GetViewMatrix();
-		s_Shader->UploadUniformMat4("projection", projection);
-		s_Shader->UploadUniformMat4("view", view);
+		//s_Shader->UploadUniformMat4("projection", projection);
+		m_LightShader->UploadUniformMat4("projection", projection);
+		//s_Shader->UploadUniformMat4("view", view);
+		m_LightShader->UploadUniformMat4("view", view);
 		glm::mat4 model = glm::mat4(1.0f);
-		s_Shader->UploadUniformMat4("model", model);*/
+		model = glm::rotate(model, glm::radians(-20.0f), glm::vec3(1.0f, 0.3f, 0.5f));
+		//s_Shader->UploadUniformMat4("model", model);
+		m_LightShader->UploadUniformMat4("model", model);
 
 		//DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
 
-		DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+		//DrawQuad({ 0.5f, 0.5f }, { 1.0f,1.0f }, { 1.0f,1.0f,1.0f });
+		//s_Shader->Bind();
 		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f);
+		//DrawCube(m_Transform->GetPosition(), 1.0f);
 
+		m_LightCubeShader->Bind();
+		DrawCube({ 0.75f, 0.2f,-0.3f }, 0.5f, false);
 
-		glfwSwapBuffers(m_Window);
-		glfwPollEvents();
+		//m_LightShader->Bind();
+		//DrawLightCube(m_Transform->GetPosition(), 1.0f);
+
+		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f, false);
+		
+
+		u_Window->OnUpdate();
 	}
 
 	void Renderer2D::Shutdown()
@@ -72,11 +76,6 @@ namespace SouraEngine
 		m_IndexBuffer->~IndexBuffer();
 
 		glfwTerminate();
-	}
-
-	void Renderer2D::LoadShader(const std::string & filepath)
-	{
-
 	}
 
 	void Renderer2D::DrawTriangle(glm::vec2 point1, glm::vec2 point2, glm::vec2 point3)
@@ -310,6 +309,143 @@ namespace SouraEngine
 		glEnableVertexAttribArray(0);
 		// color attribute
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
+		m_VertexArray->Bind();
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+	void Renderer2D::DrawCube(glm::vec3 position, float length, bool texture)
+	{
+		float verticesAlt[] =
+		{
+			//front
+			position.x + length, position.y, position.z,
+			position.x + length, position.y - length, position.z,
+			position.x, position.y, position.z,
+			position.x + length, position.y - length, position.z,
+			position.x, position.y - length, position.z,
+			position.x, position.y, position.z,
+
+			//left
+			position.x, position.y, position.z,
+			position.x, position.y - length, position.z,
+			position.x, position.y, position.z - length,
+			position.x, position.y - length, position.z,
+			position.x, position.y - length, position.z - length,
+			position.x, position.y, position.z - length,
+
+			//top
+			position.x + length, position.y, position.z - length,
+			position.x + length, position.y, position.z,
+			position.x, position.y, position.z - length,
+			position.x + length, position.y, position.z,
+			position.x, position.y, position.z,
+			position.x, position.y, position.z - length,
+
+			//right
+			position.x + length, position.y, position.z - length,
+			position.x + length, position.y - length, position.z - length,
+			position.x + length, position.y, position.z,
+			position.x + length, position.y - length, position.z - length,
+			position.x + length, position.y - length, position.z,
+			position.x + length, position.y, position.z,
+
+			//back
+			position.x + length, position.y, position.z - length,
+			position.x + length, position.y - length, position.z - length,
+			position.x, position.y, position.z - length,
+			position.x + length, position.y - length, position.z - length,
+			position.x, position.y - length, position.z - length,
+			position.x, position.y, position.z - length,
+
+			//bottom
+			position.x + length, position.y - length, position.z - length,
+			position.x + length, position.y - length, position.z,
+			position.x, position.y - length, position.z - length,
+			position.x + length, position.y - length, position.z,
+			position.x, position.y - length, position.z,
+			position.x, position.y - length, position.z - length,
+		};
+
+		m_VertexArray = std::make_shared<VertexArray>();
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
+
+		m_VertexArray->Bind();
+
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
+
+		// position attribute
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		m_VertexArray->Bind();
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+	void Renderer2D::DrawLightCube(glm::vec3 position, float length)
+	{
+		float verticesAlt[] =
+		{
+			//front
+			position.x + length, position.y, position.z, 0.0f,  0.0f, -1.0f,
+			position.x + length, position.y - length, position.z, 0.0f,  0.0f, -1.0f,
+			position.x, position.y, position.z, 0.0f,  0.0f, -1.0f,
+			position.x + length, position.y - length, position.z, 0.0f,  0.0f, -1.0f,
+			position.x, position.y - length, position.z, 0.0f,  0.0f, -1.0f,
+			position.x, position.y, position.z, 0.0f,  0.0f, -1.0f,
+
+			//left
+			position.x, position.y, position.z, 0.0f,  0.0f,  1.0f,
+			position.x, position.y - length, position.z, 0.0f,  0.0f,  1.0f,
+			position.x, position.y, position.z - length, 0.0f,  0.0f,  1.0f,
+			position.x, position.y - length, position.z, 0.0f,  0.0f,  1.0f,
+			position.x, position.y - length, position.z - length, 0.0f,  0.0f,  1.0f,
+			position.x, position.y, position.z - length, 0.0f,  0.0f,  1.0f,
+
+			//top
+			position.x + length, position.y, position.z - length, -1.0f,  0.0f,  0.0f,
+			position.x + length, position.y, position.z, -1.0f,  0.0f,  0.0f,
+			position.x, position.y, position.z - length, -1.0f,  0.0f,  0.0f,
+			position.x + length, position.y, position.z, -1.0f,  0.0f,  0.0f,
+			position.x, position.y, position.z, -1.0f,  0.0f,  0.0f,
+			position.x, position.y, position.z - length, -1.0f,  0.0f,  0.0f,
+
+			//right
+			position.x + length, position.y, position.z - length, 1.0f,  0.0f,  0.0f,
+			position.x + length, position.y - length, position.z - length, 1.0f,  0.0f,  0.0f,
+			position.x + length, position.y, position.z, 1.0f,  0.0f,  0.0f,
+			position.x + length, position.y - length, position.z - length, 1.0f,  0.0f,  0.0f,
+			position.x + length, position.y - length, position.z, 1.0f,  0.0f,  0.0f,
+			position.x + length, position.y, position.z, 1.0f,  0.0f,  0.0f,
+
+			//back
+			position.x + length, position.y, position.z - length, 0.0f, -1.0f,  0.0f,
+			position.x + length, position.y - length, position.z - length, 0.0f, -1.0f,  0.0f,
+			position.x, position.y, position.z - length, 0.0f, -1.0f,  0.0f,
+			position.x + length, position.y - length, position.z - length, 0.0f, -1.0f,  0.0f,
+			position.x, position.y - length, position.z - length, 0.0f, -1.0f,  0.0f,
+			position.x, position.y, position.z - length, 0.0f, -1.0f,  0.0f,
+
+			//bottom
+			position.x + length, position.y - length, position.z - length, 0.0f,  1.0f,  0.0f,
+			position.x + length, position.y - length, position.z, 0.0f,  1.0f,  0.0f,
+			position.x, position.y - length, position.z - length, 0.0f,  1.0f,  0.0f,
+			position.x + length, position.y - length, position.z, 0.0f,  1.0f,  0.0f,
+			position.x, position.y - length, position.z, 0.0f,  1.0f,  0.0f,
+			position.x, position.y - length, position.z - length, 0.0f,  1.0f,  0.0f,
+		};
+
+		m_VertexArray = std::make_shared<VertexArray>();
+		m_VertexBuffer = std::make_shared<VertexBuffer>();
+
+		m_VertexArray->Bind();
+
+		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
+
+		// position attribute
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+		// color attribute
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 
 		m_VertexArray->Bind();

@@ -2,13 +2,16 @@
 
 int main()
 {
-	SouraEngine::Renderer2D::Init();
+	std::unique_ptr<SouraEngine::Renderer2D> renderer2D;
+	renderer2D = std::make_unique<SouraEngine::Renderer2D>();
+
+	renderer2D->Init();
 
 	while (true)
 	{
-		SouraEngine::Renderer2D::OnUpdate();
+		renderer2D->OnUpdate();
 	}
-	SouraEngine::Renderer2D::Shutdown();
+	renderer2D->Shutdown();
 
 	return 0;
 }

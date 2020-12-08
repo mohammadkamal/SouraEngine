@@ -9,6 +9,7 @@ namespace SouraEngine
 	class Texture2D
 	{
 	public:
+		Texture2D() = default;
 		Texture2D(const std::string& path);
 		~Texture2D();
 

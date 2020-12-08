@@ -36,7 +36,7 @@ namespace SouraEngine
 
 		Camera(float positionX, float positionY, float positionZ, float upX, float upY, float upZ, float yaw, float pitch);
 
-		// returns the view matrix calculated using Euler Angles and the LookAt Matrix
+		glm::mat4 GetProjectionMatrix();
 		glm::mat4 GetViewMatrix();
 
 		// processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
@@ -49,6 +49,9 @@ namespace SouraEngine
 		void ProcessMouseScroll(float yOffset);
 
 	private:
+		glm::mat4 m_ProjectionMatrix;
+		glm::mat4 m_ViewMatrix;
+		
 		void UpdateCameraVectors();
 	};
 }
