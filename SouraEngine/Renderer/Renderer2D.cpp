@@ -24,7 +24,9 @@ namespace SouraEngine
 		m_LightCubeShader = std::make_shared<Shader>("Assets/Shaders/Color.shader");
 		s_Texture2D = std::make_shared<Texture2D>("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
 
-		glClear(GL_DEPTH_BUFFER_BIT);
+		m_Command->SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		m_LightCubeShader->Bind();
 		m_LightShader->Bind();
@@ -42,13 +44,13 @@ namespace SouraEngine
 		glm::mat4 projection = glm::perspective(glm::radians(-45.0f), (float)u_Window->GetWidth() / (float)u_Window->GetHeight(), 0.1f, 100.0f);
 		glm::mat4 view = s_Camera->GetViewMatrix();
 		//s_Shader->UploadUniformMat4("projection", projection);
-		m_LightShader->UploadUniformMat4("projection", projection);
+		m_LightCubeShader->UploadUniformMat4("projection", projection);
 		//s_Shader->UploadUniformMat4("view", view);
-		m_LightShader->UploadUniformMat4("view", view);
+		m_LightCubeShader->UploadUniformMat4("view", view);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, glm::radians(-20.0f), glm::vec3(1.0f, 0.3f, 0.5f));
 		//s_Shader->UploadUniformMat4("model", model);
-		m_LightShader->UploadUniformMat4("model", model);
+		m_LightCubeShader->UploadUniformMat4("model", model);
 
 		//DrawTriangle({ 0.5f, -0.5f }, { -0.5f, -0.5f }, { 0.0f,  0.5f }, { 1.0f,0.0f,0.0f }, { 0.0f,1.0f,0.0f }, { 0.0f,0.0f,1.0f }, { 0.0f,0.0f }, { 1.0f,0.0f }, { 0.5f,1.0f });
 
@@ -57,10 +59,25 @@ namespace SouraEngine
 		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f);
 		//DrawCube(m_Transform->GetPosition(), 1.0f);
 
-		m_LightCubeShader->Bind();
-		DrawCube({ 0.75f, 0.2f,-0.3f }, 0.5f, false);
+		//DrawCube({ 0.75f, 0.2f,-0.3f }, 0.5f, false);
 
-		//m_LightShader->Bind();
+		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+
+		m_LightShader->Bind();
+		m_LightShader->UploadUniformMat4("projection", projection);
+		m_LightShader->UploadUniformMat4("view", view);
+		m_LightShader->UploadUniformMat4("model", model);
+
+		m_LightShader->SetFloat3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
+		m_LightShader->SetFloat3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		m_LightShader->SetFloat3("lightPos", lightPos);
+		m_LightShader->SetFloat3("viewPos", s_Camera->Position);
+		//DrawCube({ 0.75f, 0.2f,-0.3f }, 0.5f, false);
+		DrawLightCube({ 0.75f, 0.2f,-0.3f }, 0.5f);
+
+		m_LightCubeShader->Bind();
+		DrawLightCube(m_Transform->GetPosition(), 0.5f);
+
 		//DrawLightCube(m_Transform->GetPosition(), 1.0f);
 
 		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f, false);

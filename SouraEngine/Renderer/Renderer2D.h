@@ -15,6 +15,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Components/Transform.h"
+#include "RenderCommand.h"
 
 namespace SouraEngine
 {
@@ -60,6 +61,8 @@ namespace SouraEngine
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+
+		std::shared_ptr<RenderCommand> m_Command;
 	};
 
 }
