@@ -1,24 +1,10 @@
 #include "VertexArray.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace SouraEngine
 {
-	VertexArray::VertexArray()
+	std::shared_ptr<VertexArray> VertexArray::Create()
 	{
-		glGenVertexArrays(1, &m_RendererID);
-	}
-
-	VertexArray::~VertexArray()
-	{
-		glDeleteVertexArrays(1, &m_RendererID);
-	}
-
-	void VertexArray::Bind()
-	{
-		glBindVertexArray(m_RendererID);
-	}
-
-	void VertexArray::Unbind()
-	{
-		glBindVertexArray(0);
+		return std::make_shared<OpenGLVertexArray>();
 	}
 }

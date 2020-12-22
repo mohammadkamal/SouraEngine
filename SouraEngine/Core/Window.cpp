@@ -3,7 +3,7 @@
 
 namespace SouraEngine
 {
-	Window::Window(std::string title, const unsigned int width, const unsigned int height)
+	Window::Window(std::string title, const uint32_t width, const uint32_t height)
 	{
 		m_Title = title;
 		m_Width = width;
@@ -11,7 +11,7 @@ namespace SouraEngine
 
 		m_Window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 
-		m_Context = std::make_unique<GraphicsContext>(m_Window);
+		m_Context = GraphicsContext::Create(m_Window);
 
 		if (m_Window == NULL)
 		{
@@ -32,12 +32,12 @@ namespace SouraEngine
 		m_Context->SwapBuffers();
 		glfwPollEvents();
 	}
-	unsigned int Window::GetWidth()
+	uint32_t Window::GetWidth()
 	{
 		return m_Width;
 	}
 
-	unsigned int Window::GetHeight()
+	uint32_t Window::GetHeight()
 	{
 		return m_Height;
 	}

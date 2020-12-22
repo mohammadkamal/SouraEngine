@@ -1,20 +1,18 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <memory>
 
 namespace SouraEngine
 {
 	class GraphicsContext
 	{
 	public:
-		GraphicsContext(GLFWwindow* window);
+		//GraphicsContext(GLFWwindow* window);
 		~GraphicsContext() = default;
 
-		void Init();
-		void SwapBuffers();
+		virtual void Init() = 0;
+		virtual void SwapBuffers() = 0;
 
-	private:
-		GLFWwindow* m_Window;
+		static std::unique_ptr<GraphicsContext> Create(void* window);
 
 	};
 }

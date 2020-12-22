@@ -1,32 +1,10 @@
 #include "IndexBuffer.h"
+#include "Platform/OpenGL/OpenGLIndexBuffer.h"
 
 namespace SouraEngine
 {
-	IndexBuffer::IndexBuffer()
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t * indices, uint32_t count)
 	{
-		glGenBuffers(1, &m_RendererID);
-	}
-	IndexBuffer::IndexBuffer(unsigned int * indices, unsigned int count)
-	{
-		glGenBuffers(1, &m_RendererID);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	}
-	IndexBuffer::~IndexBuffer()
-	{
-		glDeleteBuffers(1, &m_RendererID);
-	}
-	void IndexBuffer::Bind()
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
-	}
-	void IndexBuffer::Unbind()
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-	void IndexBuffer::SetData(const void * data, unsigned int size)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		return std::make_shared<OpenGLIndexBuffer>(indices, count);
 	}
 }

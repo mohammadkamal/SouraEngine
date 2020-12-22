@@ -1,7 +1,4 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <vector>
 #include <memory>
 
 namespace SouraEngine
@@ -9,18 +6,13 @@ namespace SouraEngine
 	class VertexArray
 	{
 	public:
-		VertexArray();
-		~VertexArray();
+		virtual ~VertexArray() = default;
 
-		void Bind();
-		void Unbind();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
 		//To-add vertex buffers
 
-
-	private:
-		unsigned int m_RendererID;
-		unsigned int m_VertexBufferIndex = 0;
-		
+		static std::shared_ptr<VertexArray> Create();
 	};
 }

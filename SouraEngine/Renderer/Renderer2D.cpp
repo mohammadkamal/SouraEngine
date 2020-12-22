@@ -18,12 +18,13 @@ namespace SouraEngine
 
 		glEnable(GL_DEPTH_TEST);
 
-		s_Shader = std::make_shared<Shader>("Assets/Shaders/Camera.shader");
-		m_LightShader = std::make_shared<Shader>("Assets/Shaders/Light.shader");
-		m_CubeShader = std::make_shared<Shader>("Assets/Shaders/Texture.shader");
-		m_LightCubeShader = std::make_shared<Shader>("Assets/Shaders/Color.shader");
-		s_Texture2D = std::make_shared<Texture2D>("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
+		s_Shader = Shader::Create("Assets/Shaders/Camera.shader");
+		m_LightShader = Shader::Create("Assets/Shaders/Light.shader");
+		m_CubeShader = Shader::Create("Assets/Shaders/Texture.shader");
+		m_LightCubeShader = Shader::Create("Assets/Shaders/Color.shader");
+		s_Texture2D = Texture2D::Create("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
 
+		m_Command = RenderCommand::Create();
 		m_Command->SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -104,13 +105,11 @@ namespace SouraEngine
 			point3.x, point3.y, 0.0f
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -129,12 +128,10 @@ namespace SouraEngine
 			point3.x, point3.y, 0.0f, color3.x, color3.y, color3.z
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -156,13 +153,11 @@ namespace SouraEngine
 			point3.x, point3.y, 0.0f, color3.x, color3.y, color3.z, texCoord3.x, texCoord3.y
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 
 		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -189,17 +184,13 @@ namespace SouraEngine
 			position.x - size.x, position.y, 0.0f, color.x, color.y, 0.0f, 0.0f, 1.0f
 		};
 
-		unsigned int indicesAlt[] = { 0, 1, 3, 1, 2, 3 };
+		uint32_t indicesAlt[] = { 0, 1, 3, 1, 2, 3 };
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
-		m_IndexBuffer = std::make_shared<IndexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
+		m_IndexBuffer = IndexBuffer::Create(indicesAlt, sizeof(indicesAlt));
 
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
-
-		m_IndexBuffer->SetData(indicesAlt, sizeof(indicesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -235,17 +226,13 @@ namespace SouraEngine
 			position.x - size.x, position.y, position.z, color.x, color.y, 0.0f, 0.0f, 1.0f
 		};
 
-		unsigned int indices[] = { 0, 1, 3, 1, 2, 3 };
+		uint32_t indices[] = { 0, 1, 3, 1, 2, 3 };
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
-		m_IndexBuffer = std::make_shared<IndexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
+		m_IndexBuffer = IndexBuffer::Create(indices, sizeof(indices));
 
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt,sizeof(verticesAlt));
-
-		m_IndexBuffer->SetData(indices, sizeof(indices));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -314,12 +301,10 @@ namespace SouraEngine
 			position.x, position.y - length, position.z - length, 0.0f, 1.0f
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
@@ -384,12 +369,10 @@ namespace SouraEngine
 			position.x, position.y - length, position.z - length,
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -451,12 +434,10 @@ namespace SouraEngine
 			position.x, position.y - length, position.z - length, 0.0f,  1.0f,  0.0f,
 		};
 
-		m_VertexArray = std::make_shared<VertexArray>();
-		m_VertexBuffer = std::make_shared<VertexBuffer>();
+		m_VertexArray = VertexArray::Create();
+		m_VertexBuffer = VertexBuffer::Create(verticesAlt, sizeof(verticesAlt));
 
 		m_VertexArray->Bind();
-
-		m_VertexBuffer->SetData(verticesAlt, sizeof(verticesAlt));
 
 		// position attribute
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);

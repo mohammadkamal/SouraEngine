@@ -1,22 +1,18 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
+#include <memory>
 
 namespace SouraEngine
 {
 	class IndexBuffer
 	{
 	public:
-		IndexBuffer();
-		IndexBuffer(unsigned int* indices, unsigned int count);
-		~IndexBuffer();
+		virtual ~IndexBuffer() = default;
 
-		void Bind();
-		void Unbind();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-		void SetData(const void* data, unsigned int size);
+		static std::shared_ptr<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 
-	private:
-		unsigned int m_RendererID;
 	};
 }

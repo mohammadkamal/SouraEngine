@@ -1,24 +1,19 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <memory>
 
 namespace SouraEngine
 {
 	class VertexBuffer
 	{
 	public:
-		VertexBuffer();
-		VertexBuffer(unsigned int size);
-		VertexBuffer(float* vertices, unsigned int size);
-		~VertexBuffer();
+		virtual ~VertexBuffer() = default;
 
-		void Bind();
-		void Unbind();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-		void SetData(const void* data, unsigned int size);
+		virtual void SetData(const void* data, uint32_t size) = 0;
 
-	private:
-		unsigned int m_RendererID;
-
+		static std::shared_ptr<VertexBuffer> Create(uint32_t size);
+		static std::shared_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
 	};
 }

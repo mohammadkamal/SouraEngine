@@ -1,55 +1,39 @@
 #pragma once
 
 #include <glad/glad.h> // include glad to get all the required OpenGL headers
-
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
 #include <unordered_map>
-#include <array>
 
 namespace SouraEngine
 {
-
 	class Shader
 	{
 	public:
-		// constructor reads and builds the shader
-		Shader() = default;
-		Shader(const std::string& filepath);
-		~Shader();
+		virtual ~Shader() = default;
 
-		void Bind();
-		void Unbind();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
 		// utility uniform functions
-		void SetBool(const std::string &name, bool value) const;
+		virtual void SetBool(const std::string &name, bool value) = 0;
 
-		void SetInt(const std::string &name, int value) const;
-		void SetIntArray(const std::string &name, int* values, uint32_t count) const;
+		virtual void SetInt(const std::string &name, int value) = 0;
+		virtual void SetIntArray(const std::string &name, int* values, uint32_t count) = 0;
 
-		void SetFloat(const std::string &name, float value) const;
-		void SetFloat2(const std::string &name, const glm::vec2& value);
-		void SetFloat2(const std::string &name, float x, float y);
-		void SetFloat3(const std::string &name, const glm::vec3& value);
-		void SetFloat3(const std::string &name, float x, float y, float z);
-		void SetFloat4(const std::string &name, const glm::vec4& value);
-		void SetFloat4(const std::string &name, float x, float y, float z, float w);
+		virtual void SetFloat(const std::string &name, float value) = 0;
+		virtual void SetFloat2(const std::string &name, const glm::vec2& value) = 0;
+		virtual void SetFloat2(const std::string &name, float x, float y) = 0;
+		virtual void SetFloat3(const std::string &name, const glm::vec3& value) = 0;
+		virtual void SetFloat3(const std::string &name, float x, float y, float z) = 0;
+		virtual void SetFloat4(const std::string &name, const glm::vec4& value) = 0;
+		virtual void SetFloat4(const std::string &name, float x, float y, float z, float w) = 0;
 
-		void UploadUniformMat2(const std::string &name, const glm::mat2& matrix);
-		void UploadUniformMat3(const std::string &name, const glm::mat3& matrix);
-		void UploadUniformMat4(const std::string &name, const glm::mat4& matrix);
+		virtual void UploadUniformMat2(const std::string &name, const glm::mat2& matrix) = 0;
+		virtual void UploadUniformMat3(const std::string &name, const glm::mat3& matrix) = 0;
+		virtual void UploadUniformMat4(const std::string &name, const glm::mat4& matrix) = 0;
 
-	private:
-		std::string ReadFile(const std::string& filepath);
-		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
-		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
+		static std::shared_ptr<Shader> Create(const std::string& filepath);
 
-		uint32_t m_RendererID; //Program ID
 	};
 }

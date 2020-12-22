@@ -1,21 +1,16 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
-#include "Shader.h"
 
 namespace SouraEngine
 {
 	class Texture2D
 	{
 	public:
-		Texture2D() = default;
-		Texture2D(const std::string& path);
-		~Texture2D();
+		virtual ~Texture2D() = default;
 
-		void Bind(uint32_t slot);
+		virtual void Bind(uint32_t slot) = 0;
 
-	private:
-		unsigned int texture;
+		static std::shared_ptr<Texture2D> Create(const std::string& path);
+
 	};
 }

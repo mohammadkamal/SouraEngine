@@ -1,2 +1,18 @@
-﻿  Renderer2D.cpp
+﻿  Window.cpp
+  OpenGLIndexBuffer.cpp
+  OpenGLRenderCommand.cpp
+  OpenGLShader.cpp
+d:\work\programming projects\souraengine\souraengine\platform\opengl\openglshader.cpp(102): warning C4244: 'initializing': conversion from 'std::streamoff' to 'size_t', possible loss of data
+  OpenGLVertexArray.cpp
+  OpenGLVertexBuffer.cpp
+  IndexBuffer.cpp
+  RenderCommand.cpp
+  Renderer2D.cpp
+  VertexArray.cpp
+  VertexBuffer.cpp
+  Wajeha.cpp
+  FileSystem.cpp
+  main.cpp
+  Generating Code...
+d:\work\programming projects\souraengine\souraengine\utilities\filesystem.cpp(112): warning C4715: 'FileSystem::CopyFileFromTo': not all control paths return a value
   SouraEngine.vcxproj -> D:\Work\Programming Projects\SouraEngine\Debug\SouraEngine.exe

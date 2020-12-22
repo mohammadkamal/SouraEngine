@@ -1,9 +1,11 @@
 #include "RenderCommand.h"
+#include "Platform/OpenGL/OpenGLRenderCommand.h"
 
 namespace SouraEngine
 {
-	void RenderCommand::SetClearColor(glm::vec4 color)
+
+	std::unique_ptr<RenderCommand> RenderCommand::Create()
 	{
-		glClearColor(color.x, color.y, color.z, color.w);
+		return std::make_unique<OpenGLRenderCommand>();
 	}
 }

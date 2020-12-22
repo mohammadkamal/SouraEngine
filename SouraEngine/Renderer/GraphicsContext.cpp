@@ -1,22 +1,11 @@
 #include "GraphicsContext.h"
-#include <iostream>
+
+#include "Platform/OpenGL/OpenGLGraphicsContext.h"
 
 namespace SouraEngine
 {
-	GraphicsContext::GraphicsContext(GLFWwindow * window)
+	std::unique_ptr<GraphicsContext> GraphicsContext::Create(void * window)
 	{
-		m_Window = window;
-	}
-	void GraphicsContext::Init()
-	{
-		glfwMakeContextCurrent(m_Window);
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			std::cout << "Failed to initialize GLAD";
-		}
-	}
-	void GraphicsContext::SwapBuffers()
-	{
-		glfwSwapBuffers(m_Window);
+		return std::make_unique<OpenGLGraphicsContext>(static_cast<GLFWwindow*>(window));
 	}
 }

@@ -141,6 +141,13 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLGraphicsContext.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLRenderCommand.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLTexture2D.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="Renderer\Camera.cpp" />
     <ClCompile Include="Renderer\GraphicsContext.cpp" />
     <ClCompile Include="Renderer\IndexBuffer.cpp" />
@@ -156,6 +163,13 @@
   <ItemGroup>
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLGraphicsContext.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLIndexBuffer.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLRenderCommand.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLTexture2D.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLVertexBuffer.h" />
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="includes\stb_image\stb_image.h" />
     <ClInclude Include="Renderer\GraphicsContext.h" />
