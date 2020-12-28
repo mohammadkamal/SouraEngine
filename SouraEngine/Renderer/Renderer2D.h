@@ -11,6 +11,7 @@
 #include "Shader.h"
 #include "Texture2D.h"
 #include "Camera.h"
+#include "PerspectiveCamera.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -23,8 +24,8 @@ namespace SouraEngine
 	class Renderer2D
 	{
 	public:
-
-		Renderer2D();
+		//Renderer2D();
+		Renderer2D() = default;
 
 		void Init();
 		void OnUpdate();
@@ -47,12 +48,21 @@ namespace SouraEngine
 		//LightCube
 		void DrawLightCube(glm::vec3 position, float length);
 
+		
+		static Renderer2D& get()
+		{
+			static Renderer2D g_Renderer2D;
+			return g_Renderer2D;
+		}
+
 	private:
+
 		std::unique_ptr<Window> u_Window;
 		std::shared_ptr<Shader> s_Shader;
 		std::shared_ptr<Shader> m_LightShader;
 		std::shared_ptr<Texture2D> s_Texture2D;
 		std::shared_ptr<Camera> s_Camera;
+		std::shared_ptr<PerspectiveCamera> m_PerCamera;
 
 		std::unique_ptr<Transform> m_Transform;
 		std::shared_ptr<Shader> m_CubeShader;

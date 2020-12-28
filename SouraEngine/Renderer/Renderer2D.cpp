@@ -3,16 +3,23 @@
 namespace SouraEngine
 {
 
-	Renderer2D::Renderer2D()
+	/*Renderer2D::Renderer2D()
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	}
+	}*/
 
 	void Renderer2D::Init()
 	{
+		{ //For trial
+			glfwInit();
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		}
+
 		u_Window = std::make_unique<Window>("SouraEngine", 1280, 720);
 		glfwSetFramebufferSizeCallback(u_Window->GetNativeWindow(), Window::framebufferSizeCallback);
 

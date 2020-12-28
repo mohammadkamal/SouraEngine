@@ -1,6 +1,8 @@
 #include "OpenGLGraphicsContext.h"
 #include <iostream>
 
+#include "Core/Window.h"
+
 namespace SouraEngine
 {
 	OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow * window) :m_Window(window)
