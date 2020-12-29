@@ -168,6 +168,7 @@
     <ClCompile Include="UI\Wajeha.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Core\Input.h" />
     <ClInclude Include="Math\MathRoot.h" />

@@ -40,14 +40,14 @@ namespace Reyadhah
 		sprintf_s(temp, "X:%f, Y:%f, Z:%f, W:%f", x, y, z, w);
 		return std::string(temp);
 	}
-	Vector2 Vector4::ToVector2()
+	/*Vector2 Vector4::ToVector2()
 	{
-		return Vector2(x, y);
+		return Vector2(this->x, this->y);
 	}
 	Vector3 Vector4::ToVector3()
 	{
-		return Vector3(x, y, z);
-	}
+		return Vector3(this->x, this->y, this->z);
+	}*/
 	float Vector4::Distance(const Vector4 & a, const Vector4 & b)
 	{
 		return sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2) + powf(a.z - b.z, 2) + powf(a.w - b.w, 2));

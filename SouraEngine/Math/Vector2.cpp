@@ -44,7 +44,7 @@ namespace Reyadhah
 		return std::string(temp);
 	}
 
-	Vector3 Vector2::ToVector3()
+	/*Vector3 Vector2::ToVector3()
 	{
 		return Vector3(this->x, this->y, 0.0f);
 	}
@@ -52,7 +52,7 @@ namespace Reyadhah
 	Vector4 Vector2::ToVector4()
 	{
 		return Vector4(this->x, this->y, 0.0f, 0.0f);
-	}
+	}*/
 
 	float Vector2::Angle(const Vector2 & from, const Vector2 & to)
 	{

@@ -20,8 +20,8 @@ namespace Reyadhah
 		//Methods ============================
 		void Normalize();
 		std::string ToString();
-		Vector2 ToVector2();
-		Vector3 ToVector3();
+		//Vector2 ToVector2();
+		//Vector3 ToVector3();
 
 		//Static Methods =====================
 		static float Distance(const Vector4& a, const Vector4& b);

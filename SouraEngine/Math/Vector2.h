@@ -20,8 +20,8 @@ namespace Reyadhah
 		//Methods ============================
 		void Normalize();
 		std::string ToString();
-		Vector3 ToVector3();
-		Vector4 ToVector4();
+		//Vector3 ToVector3();
+		//Vector4 ToVector4();
 
 		//Static Methods =====================
 		static float Angle(const Vector2& from, const Vector2& to);

@@ -45,14 +45,14 @@ namespace Reyadhah
 		sprintf_s(temp, "X:%f, Y:%f, Z:%f", x, y, z);
 		return std::string(temp);
 	}
-	Vector2 Vector3::ToVector2()
+	/*Vector2 Vector3::ToVector2()
 	{
 		return Vector2(this->x, this->y);
 	}
 	Vector4 Vector3::ToVector4()
 	{
 		return Vector4(this->x, this->y, this->z, 0.0f);
-	}
+	}*/
 	float Vector3::Angle(const Vector3 & from, const Vector3 & to)
 	{
 		return Dot(from, to) / (from.magnitude * to.magnitude);

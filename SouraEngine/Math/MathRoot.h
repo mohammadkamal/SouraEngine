@@ -18,6 +18,7 @@ namespace Reyadhah
 	//Inline Methods =========================================
 
 	inline double Acos(float value) { return acos(value); }
+	inline float AcosF(float value) { return acosf(value); }
 
 	inline double Cotan(float value) { return cos(value) / sin(value); }
 	inline float CotanF(float value) { return cosf(value) / sinf(value); }

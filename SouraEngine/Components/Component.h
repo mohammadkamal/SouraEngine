@@ -22,8 +22,8 @@ namespace SouraEngine
 
 	struct Attribute
 	{
-		std::function<std::any()> get;
-		std::function<void(std::any)> set;
+		std::function<std::any()> Get;
+		std::function<void(std::any)> Set;
 	};
 
 

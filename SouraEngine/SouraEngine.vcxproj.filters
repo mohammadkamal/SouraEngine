@@ -197,6 +197,9 @@
     <ClInclude Include="Math\MathRoot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Simple.shader" />
