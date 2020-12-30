@@ -25,10 +25,10 @@ namespace SouraEngine
 
 		glEnable(GL_DEPTH_TEST);
 
-		s_Shader = Shader::Create("Assets/Shaders/Camera.shader");
-		m_LightShader = Shader::Create("Assets/Shaders/Light.shader");
-		m_CubeShader = Shader::Create("Assets/Shaders/Texture.shader");
-		m_LightCubeShader = Shader::Create("Assets/Shaders/Color.shader");
+		s_Shader = Shader::Create("../Assets/Shaders/Camera.shader");
+		m_LightShader = Shader::Create("../Assets/Shaders/Light.shader");
+		m_CubeShader = Shader::Create("../Assets/Shaders/Texture.shader");
+		m_LightCubeShader = Shader::Create("../Assets/Shaders/Color.shader");
 		s_Texture2D = Texture2D::Create("D:/Work/Programming Projects/SouraEngine/SouraEngine/Assets/Textures/container.jpg");
 
 		m_Command = RenderCommand::Create();
