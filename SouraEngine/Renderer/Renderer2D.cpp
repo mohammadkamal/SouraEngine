@@ -96,10 +96,6 @@ namespace SouraEngine
 
 	void Renderer2D::Shutdown()
 	{
-		m_VertexArray->~VertexArray();
-		m_VertexBuffer->~VertexBuffer();
-		m_IndexBuffer->~IndexBuffer();
-
 		glfwTerminate();
 	}
 

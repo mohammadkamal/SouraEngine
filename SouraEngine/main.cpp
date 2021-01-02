@@ -1,5 +1,6 @@
 #include "Renderer/Renderer2D.h"
 
+
 SouraEngine::Renderer2D g_Renderer2D;
 
 int main()

@@ -1,2 +1,6 @@
 #Visual Studio files and folder
 .vs/
+Debug/
+SouraEngine/Debug/
+x64/
+SouraEngine/x64/

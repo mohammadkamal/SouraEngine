@@ -26,5 +26,8 @@ namespace SouraEngine
 		std::function<void(std::any)> Set;
 	};
 
+	class Component : public Object
+	{
 
+	};
 }

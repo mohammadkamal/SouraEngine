@@ -7,7 +7,7 @@
 #include <iostream>
 #include <memory>
 
-#include "Window.h"
+#include "Core/Window.h"
 #include "Shader.h"
 #include "Texture2D.h"
 #include "Camera.h"

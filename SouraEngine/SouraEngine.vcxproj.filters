@@ -200,6 +200,12 @@
     <ClInclude Include="Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntityComponentSystem\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityComponentSystem\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Simple.shader" />
