@@ -179,7 +179,6 @@
     <ClCompile Include="Renderer\VertexArray.cpp" />
     <ClCompile Include="Renderer\VertexBuffer.cpp" />
     <ClCompile Include="Utilities\FileSystem.cpp" />
-    <ClCompile Include="UI\Wajeha.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Component.h" />
@@ -213,7 +212,6 @@
     <ClInclude Include="Renderer\VertexArray.h" />
     <ClInclude Include="Renderer\VertexBuffer.h" />
     <ClInclude Include="Utilities\FileSystem.h" />
-    <ClInclude Include="UI\Wajeha.h" />
     <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
