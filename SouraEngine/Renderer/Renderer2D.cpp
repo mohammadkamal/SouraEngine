@@ -1,4 +1,5 @@
 #include "Renderer2D.h"
+#include "Core/Application.h"
 
 namespace SouraEngine
 {
@@ -11,17 +12,20 @@ namespace SouraEngine
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	}*/
 
+	void Renderer2D::Awake()
+	{
+		glfwInit();
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	}
+
 	void Renderer2D::Init()
 	{
-		{ //For trial
-			glfwInit();
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		}
 
-		u_Window = std::make_unique<Window>("SouraEngine", 1280, 720);
-		glfwSetFramebufferSizeCallback(u_Window->GetNativeWindow(), Window::framebufferSizeCallback);
+		//u_Window = Window::Create();
+		//u_Window = std::make_unique<Window>("SouraEngine", 1280, 720);
+		//glfwSetFramebufferSizeCallback(u_Window->GetNativeWindow(), Window::framebufferSizeCallback);
 
 		glEnable(GL_DEPTH_TEST);
 
@@ -49,7 +53,8 @@ namespace SouraEngine
 	{
 		//s_Texture2D->Bind(GL_TEXTURE_2D);
 
-		glm::mat4 projection = glm::perspective(glm::radians(-45.0f), (float)u_Window->GetWidth() / (float)u_Window->GetHeight(), 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(-45.0f), (float)Application::Get().GetWindow().GetWidth() / (float)Application::Get().GetWindow().GetHeight(), 0.1f, 100.0f);
+
 		glm::mat4 view = s_Camera->GetViewMatrix();
 		//s_Shader->UploadUniformMat4("projection", projection);
 		m_LightCubeShader->UploadUniformMat4("projection", projection);
@@ -81,7 +86,7 @@ namespace SouraEngine
 		m_LightShader->SetFloat3("lightPos", lightPos);
 		m_LightShader->SetFloat3("viewPos", s_Camera->Position);
 		//DrawCube({ 0.75f, 0.2f,-0.3f }, 0.5f, false);
-		DrawLightCube({ 0.75f, 0.2f,-0.3f }, 0.5f);
+		SouraEngine::Renderer2D::get().DrawLightCube({ 0.75f, 0.2f,-0.3f }, 0.5f);
 
 		m_LightCubeShader->Bind();
 		DrawLightCube(m_Transform->GetPosition(), 0.5f);
@@ -89,9 +94,9 @@ namespace SouraEngine
 		//DrawLightCube(m_Transform->GetPosition(), 1.0f);
 
 		//DrawCube({ -0.5f, 0.5f,-0.5f }, 1.0f, false);
-		
 
-		u_Window->OnUpdate();
+
+		//u_Window->OnUpdate();
 	}
 
 	void Renderer2D::Shutdown()

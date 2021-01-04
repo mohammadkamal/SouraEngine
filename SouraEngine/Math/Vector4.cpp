@@ -56,6 +56,26 @@ namespace Reyadhah
 	{
 		return leftHandSide.x * rightHandSide.x + leftHandSide.y * rightHandSide.y + leftHandSide.z * rightHandSide.z + leftHandSide.w * rightHandSide.w;
 	}
+	Vector4 Vector4::Lerp(const Vector4 & a, const Vector4 & b, float t)
+	{
+		return Vector4((1.0f - t) * a.x + t * b.x, (1.0f - t) * a.y + t * b.y, (1.0f - t) * a.z + t * b.z, (1.0f - t) * a.w + t * b.w);
+	}
+	Vector4 Vector4::Maximum(const Vector4 & leftHandSide, const Vector4 & rightHandSide)
+	{
+		float tempX = leftHandSide.x >= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y >= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		float tempZ = leftHandSide.z >= rightHandSide.z ? leftHandSide.z : rightHandSide.z;
+		float tempW = leftHandSide.w >= rightHandSide.w ? leftHandSide.w : rightHandSide.w;
+		return Vector4(tempX, tempY, tempZ, tempW);
+	}
+	Vector4 Vector4::Minimum(const Vector4 & leftHandSide, const Vector4 & rightHandSide)
+	{
+		float tempX = leftHandSide.x <= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y <= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		float tempZ = leftHandSide.z <= rightHandSide.z ? leftHandSide.z : rightHandSide.z;
+		float tempW = leftHandSide.w <= rightHandSide.w ? leftHandSide.w : rightHandSide.w;
+		return Vector4(tempX, tempY, tempZ, tempW);
+	}
 	Vector4 Vector4::operator+(const Vector4 & target)
 	{
 		return Vector4(this->x + target.x, this->y + target.y, this->z + target.z, this->w + target.w);

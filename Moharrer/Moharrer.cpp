@@ -1,6 +1,9 @@
 #include <iostream>
+#include "Core/Application.h"
+#include "Editor.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	SouraEngine::Application::Get().Run();
+	Moharrer::Editor::Get().OnUpdate();
 }

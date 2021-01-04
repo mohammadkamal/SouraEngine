@@ -27,6 +27,7 @@ namespace SouraEngine
 		//Renderer2D();
 		Renderer2D() = default;
 
+		void Awake();
 		void Init();
 		void OnUpdate();
 		void Shutdown();

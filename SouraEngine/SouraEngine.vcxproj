@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\Transform.cpp" />
+    <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
@@ -167,6 +168,8 @@
     <ClCompile Include="Platform\OpenGL\OpenGLTexture2D.cpp" />
     <ClCompile Include="Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Platform\OpenGL\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Renderer\Camera.cpp" />
     <ClCompile Include="Renderer\Framebuffer.cpp" />
     <ClCompile Include="Renderer\GraphicsContext.cpp" />
@@ -183,7 +186,10 @@
   <ItemGroup>
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Transform.h" />
+    <ClInclude Include="Core\Application.h" />
     <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Core\KeyCodes.h" />
+    <ClInclude Include="Core\MouseCodes.h" />
     <ClInclude Include="EntityComponentSystem\Entity.h" />
     <ClInclude Include="EntityComponentSystem\Object.h" />
     <ClInclude Include="Math\MathRoot.h" />
@@ -199,6 +205,7 @@
     <ClInclude Include="Platform\OpenGL\OpenGLTexture2D.h" />
     <ClInclude Include="Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Platform\OpenGL\OpenGLVertexBuffer.h" />
+    <ClInclude Include="Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="includes\stb_image\stb_image.h" />
     <ClInclude Include="Renderer\Framebuffer.h" />

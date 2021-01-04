@@ -73,6 +73,24 @@ namespace Reyadhah
 	{
 		return leftHandSide.x * rightHandSide.x + leftHandSide.y * rightHandSide.y + leftHandSide.z * rightHandSide.z;
 	}
+	Vector3 Vector3::Lerp(const Vector3 & a, const Vector3 & b, float t)
+	{
+		return Vector3((1.0f - t) * a.x + t * b.x, (1.0f - t) * a.y + t * b.y, (1.0f - t) * a.z + t * b.z);
+	}
+	Vector3 Vector3::Maximum(const Vector3 & leftHandSide, const Vector3 & rightHandSide)
+	{
+		float tempX = leftHandSide.x >= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y >= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		float tempZ = leftHandSide.z >= rightHandSide.z ? leftHandSide.z : rightHandSide.z;
+		return Vector3(tempX, tempY, tempZ);
+	}
+	Vector3 Vector3::Minimum(const Vector3 & leftHandSide, const Vector3 & rightHandSide)
+	{
+		float tempX = leftHandSide.x <= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y <= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		float tempZ = leftHandSide.z <= rightHandSide.z ? leftHandSide.z : rightHandSide.z;
+		return Vector3(tempX, tempY, tempZ);
+	}
 	Vector3 Vector3::operator+(const Vector3 & target)
 	{
 		return Vector3(this->x + target.x, this->y + target.y, this->z + target.z);

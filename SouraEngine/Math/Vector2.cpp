@@ -8,7 +8,7 @@ namespace Reyadhah
 	const Vector2 Vector2::up(0.0f, 1.0f);
 	const Vector2 Vector2::one(1.0f, 1.0f);
 	const Vector2 Vector2::zero(0.0f, 0.0f);
-
+	
 	Vector2::Vector2()
 	{
 		x = 0;
@@ -67,6 +67,25 @@ namespace Reyadhah
 	float Vector2::Dot(const Vector2 & leftHandSide, const Vector2 & rightHandSide)
 	{
 		return leftHandSide.x * rightHandSide.x + leftHandSide.y * rightHandSide.y;
+	}
+
+	Vector2 Vector2::Lerp(const Vector2 & a, const Vector2 & b, float t)
+	{
+		return Vector2((1.0f - t) * a.x + t * b.x, (1.0f - t) * a.y + t * b.y);
+	}
+
+	Vector2 Vector2::Maximum(const Vector2 & leftHandSide, const Vector2 & rightHandSide)
+	{
+		float tempX = leftHandSide.x >= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y >= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		return Vector2(tempX, tempY);
+	}
+
+	Vector2 Vector2::Minimum(const Vector2 & leftHandSide, const Vector2 & rightHandSide)
+	{
+		float tempX = leftHandSide.x <= rightHandSide.x ? leftHandSide.x : rightHandSide.x;
+		float tempY = leftHandSide.y <= rightHandSide.y ? leftHandSide.y : rightHandSide.y;
+		return Vector2(tempX, tempY);
 	}
 
 	Vector2 Vector2::operator+(const Vector2 & target)

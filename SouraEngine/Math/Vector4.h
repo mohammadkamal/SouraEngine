@@ -26,7 +26,13 @@ namespace Reyadhah
 		//Static Methods =====================
 		static float Distance(const Vector4& a, const Vector4& b);
 		static float Dot(const Vector4& leftHandSide, const Vector4& rightHandSide);
-		//Other methods to be added
+		static Vector4 Lerp(const Vector4& a, const Vector4& b, float t);
+		//static Vector4 LerpUnclamped(const Vector4& a, const Vector4& b, float t);
+		static Vector4 Maximum(const Vector4& leftHandSide, const Vector4& rightHandSide);
+		static Vector4 Minimum(const Vector4& leftHandSide, const Vector4& rightHandSide);
+		//MoveTowards
+		//Project
+		//Scale
 
 		//Operators ==========================
 		//Addition ---------------------------

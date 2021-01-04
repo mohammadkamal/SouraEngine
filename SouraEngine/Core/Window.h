@@ -1,31 +1,35 @@
 #pragma once
 #include <string>
-#include <memory>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include "Renderer/GraphicsContext.h"
 
 namespace SouraEngine
 {
+	struct WindowProperties
+	{
+		std::string Title;
+		uint32_t Width;
+		uint32_t Height;
+
+		WindowProperties(const std::string& title = "Soura Engine",
+			uint32_t width = 1280,
+			uint32_t height = 720)
+			:Title(title), Width(width), Height(height)
+		{}
+	};
+
 	class Window
 	{
 	public:
-		Window(std::string title, const uint32_t width, const uint32_t height);
-		~Window();
+		virtual ~Window() = default;
 
-		void OnUpdate();
+		virtual void OnUpdate() = 0;
 
-		uint32_t GetWidth();
-		uint32_t GetHeight();
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
 
-		static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+		virtual void* GetNativeWindow() const = 0;
 
-		GLFWwindow* GetNativeWindow() const { return m_Window; }
+		static std::unique_ptr<Window> Create(const WindowProperties& props = WindowProperties());
 
-	private:
-		std::string m_Title;
-		uint32_t m_Width, m_Height;
-		GLFWwindow* m_Window;
-		std::unique_ptr<GraphicsContext> m_Context;
 	};
 }

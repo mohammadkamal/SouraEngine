@@ -19,16 +19,31 @@ namespace Reyadhah
 
 		//Methods ============================
 		void Normalize();
+		//OrthoNormalize
 		std::string ToString();
 		//Vector2 ToVector2();
 		//Vector4 ToVector4();
 
 		//Static Methods =====================
 		static float Angle(const Vector3& from, const Vector3& to);
+		//ClampMagnitude
 		static Vector3 Cross(const Vector3& leftHandSize, const Vector3& rightHandSide);
 		static float Distance(const Vector3& a, const Vector3& b);
 		static float Dot(const Vector3& leftHandSide, const Vector3& rightHandSide);
-		//Other methods to be added
+		static Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
+		//static Vector3 LerpUnclamped(const Vector3& a, const Vector3& b, float t);
+		static Vector3 Maximum(const Vector3& leftHandSide, const Vector3& rightHandSide);
+		static Vector3 Minimum(const Vector3& leftHandSide, const Vector3& rightHandSide);
+		//MoveTowards
+		//Project
+		//ProjectOnPlane
+		//Reflect
+		//RotateTowards
+		//Scale
+		//SignedAngle
+		//Slerp
+		//SlerpUnclamped
+		//SmoothDamp
 
 		//Operators ==========================
 		//Addition ---------------------------

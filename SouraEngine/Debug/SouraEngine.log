@@ -1,2 +1,7 @@
-﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  WindowsInput.cpp
+d:\work\programming projects\souraengine\souraengine\core\keycodes.h(136): warning C4091: 'typedef ': ignored on left of 'SouraEngine::KeyCode' when no variable is declared
+d:\work\programming projects\souraengine\souraengine\core\mousecodes.h(20): warning C4091: 'typedef ': ignored on left of 'SouraEngine::MouseCode' when no variable is declared
+d:\work\programming projects\souraengine\souraengine\math\mathroot.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+  main.cpp
+  Generating Code...
   SouraEngine.vcxproj -> D:\Work\Programming Projects\SouraEngine\Debug\SouraEngine.exe
