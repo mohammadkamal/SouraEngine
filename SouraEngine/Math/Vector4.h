@@ -40,10 +40,14 @@ namespace Reyadhah
 		/// <summary>Used for adding two vectors</summary>
 		Vector4 operator+(const Vector4& target);
 		void operator+=(const Vector4& target);
+		void operator++(); //prefix i.e: ++i
+		void operator++(int); //postfix i.e: i++
 
 		//Subtraction ------------------------
 		Vector4 operator-(const Vector4& target);
 		void operator-=(const Vector4& target);
+		void operator--(); //prefix i.e: --i
+		void operator--(int); //postfix i.e:i--
 
 		//Multiplication ---------------------
 		Vector4 operator*(const Vector4& target);
@@ -57,12 +61,19 @@ namespace Reyadhah
 		Vector4 operator/(const float value);
 		void operator/=(const float value);
 
-		//Equality ---------------------------
+		//Boolean ----------------------------
 		bool operator==(const Vector4& target);
 		bool operator!=(const Vector4& target);
 
+		//Logical ----------------------------
+		Vector4 operator&&(const Vector4& target); //For trial
+		Vector4 operator||(const Vector4& target); //For trial
+
 		//Assignment -------------------------
 		Vector4 operator=(const Vector4& target);
+
+		//Array ------------------------------
+		float operator[](int index);
 
 		//Static Properties ==================
 		static const Vector4 one;

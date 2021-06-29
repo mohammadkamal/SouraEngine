@@ -156,6 +156,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="includes\stb_image\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="EntityComponentSystem\Entity.h" />
     <ClInclude Include="EntityComponentSystem\Object.h" />
     <ClInclude Include="Math\MathRoot.h" />
+    <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />

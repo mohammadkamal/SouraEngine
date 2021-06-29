@@ -100,6 +100,21 @@ namespace Reyadhah
 		this->x += target.x;
 		this->y += target.y;
 		this->z += target.z;
+		CalculateFields();
+	}
+	void Vector3::operator++()
+	{
+		++this->x;
+		++this->y;
+		++this->z;
+		CalculateFields();
+	}
+	void Vector3::operator++(int)
+	{
+		this->x++;
+		this->y++;
+		this->z++;
+		CalculateFields();
 	}
 	Vector3 Vector3::operator-(const Vector3 & target)
 	{
@@ -110,6 +125,21 @@ namespace Reyadhah
 		this->x -= target.x;
 		this->y -= target.y;
 		this->z -= target.z;
+		CalculateFields();
+	}
+	void Vector3::operator--()
+	{
+		--this->x;
+		--this->y;
+		--this->z;
+		CalculateFields();
+	}
+	void Vector3::operator--(int)
+	{
+		this->x--;
+		this->y--;
+		this->z--;
+		CalculateFields();
 	}
 	Vector3 Vector3::operator*(const Vector3 & target)
 	{
@@ -120,6 +150,7 @@ namespace Reyadhah
 		this->x *= target.x;
 		this->y *= target.y;
 		this->z *= target.z;
+		CalculateFields();
 	}
 	Vector3 Vector3::operator*(const float value)
 	{
@@ -130,6 +161,7 @@ namespace Reyadhah
 		this->x *= value;
 		this->y *= value;
 		this->z *= value;
+		CalculateFields();
 	}
 	Vector3 Vector3::operator/(const Vector3 & target)
 	{
@@ -140,6 +172,7 @@ namespace Reyadhah
 		this->x /= target.x;
 		this->y /= target.y;
 		this->z /= target.z;
+		CalculateFields();
 	}
 	Vector3 Vector3::operator/(const float value)
 	{
@@ -150,6 +183,7 @@ namespace Reyadhah
 		this->x /= value;
 		this->y /= value;
 		this->z /= value;
+		CalculateFields();
 	}
 	bool Vector3::operator==(const Vector3 & target)
 	{
@@ -159,9 +193,30 @@ namespace Reyadhah
 	{
 		return this->x != target.x || this->y != target.y || this->z != target.z;;
 	}
+	Vector3 Vector3::operator&&(const Vector3 & target)
+	{
+		return Vector3(this->x && target.x, this->y && target.y, this->z && target.z);
+	}
+	Vector3 Vector3::operator||(const Vector3 & target)
+	{
+		return Vector3(this->x || target.x, this->y || target.y, this->z || target.z);
+	}
 	Vector3 Vector3::operator=(const Vector3 & target)
 	{
 		return Vector3(this->x = target.x, this->y = target.y, this->z = target.z);
+	}
+	float Vector3::operator[](int index)
+	{
+		switch (index)
+		{
+		default:
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		}
 	}
 	Vector3 Vector3::normalized() const
 	{

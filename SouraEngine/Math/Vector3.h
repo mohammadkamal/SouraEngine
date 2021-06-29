@@ -51,10 +51,14 @@ namespace Reyadhah
 		/// <summary>Used for adding two vectors</summary>
 		Vector3 operator+(const Vector3& target);
 		void operator+=(const Vector3& target);
+		void operator++(); //prefix i.e: ++i
+		void operator++(int); //postfix i.e.: i++
 
 		//Subtraction ------------------------
 		Vector3 operator-(const Vector3& target);
 		void operator-=(const Vector3& target);
+		void operator--(); //prefix i.e: --i
+		void operator--(int); //postfix i.e:i--
 
 		//Multiplication ---------------------
 		Vector3 operator*(const Vector3& target);
@@ -68,12 +72,19 @@ namespace Reyadhah
 		Vector3 operator/(const float value);
 		void operator/=(const float value);
 
-		//Equality ---------------------------
+		//Boolean ----------------------------
 		bool operator==(const Vector3& target);
 		bool operator!=(const Vector3& target);
 
+		//Logical ----------------------------
+		Vector3 operator&&(const Vector3& target); //For trial
+		Vector3 operator||(const Vector3& target); //For trial
+
 		//Assignment -------------------------
 		Vector3 operator=(const Vector3& target);
+
+		//Array ------------------------------
+		float operator[](int index);
 
 		//Static Properties ==================
 		static const Vector3 back;

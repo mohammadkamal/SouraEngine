@@ -6,16 +6,16 @@ namespace SouraEngine
 {
 	enum ComponentType
 	{
-		//ComponentType_AudioListener,
-		//ComponentType_AudioSource,
+		ComponentType_AudioListener,
+		ComponentType_AudioSource,
 		ComponentType_Camera,
-		//ComponentType_Collider,
-		//ComponentType_Constraint,
-		//ComponentType_Light,
+		ComponentType_Collider,
+		ComponentType_Constraint,
+		ComponentType_Light,
 		ComponentType_Renderable,
-		//ComponentType_RigidBody,
-		//ComponentType_Script,
-		//ComponentType_Skybox,
+		ComponentType_RigidBody,
+		ComponentType_Script,
+		ComponentType_Skybox,
 		ComponentType_Transform,
 		ComponentType_Unknown
 	};

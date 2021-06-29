@@ -35,22 +35,17 @@ namespace SouraEngine
 		// Public Methods ===========================================
 		std::shared_ptr<Component> AddComponent(ComponentType type);
 
-		template <class T>
-		constexpr std::shared_ptr<T> AddComponent();
+		template <class T> constexpr std::shared_ptr<T> AddComponent();
 
-		template <class T>
-		constexpr std::shared_ptr<T> GetComponent();
+		template <class T> constexpr std::shared_ptr<T> GetComponent();
 
-		template <class T>
-		constexpr std::vector<std::shared_ptr<T>> GetComponents();
+		template <class T> constexpr std::vector<std::shared_ptr<T>> GetComponents();
 
 		bool HasComponent(const ComponentType type);
 
-		template <class T>
-		constexpr bool HasComponent();
+		template <class T> constexpr bool HasComponent();
 
-		template <class T>
-		constexpr void RemoveComponent();
+		template <class T> constexpr void RemoveComponent();
 
 		void RemoveComponent(uint32_t id);
 

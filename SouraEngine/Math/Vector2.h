@@ -105,9 +105,14 @@ namespace Reyadhah
 		/// <param name="target">The target vector to be added to the original vector.</param>
 		void operator+=(const Vector2& target);
 
+		void operator++(); //prefix i.e: ++i
+		void operator++(int); //postfix i.e: i++
+
 		//Subtraction ---------------------------------------------------------------------
 		Vector2 operator-(const Vector2& target);
 		void operator-=(const Vector2& target);
+		void operator--(); //prefix i.e: --i
+		void operator--(int); //postfix i.e: i--
 
 		//Multiplication ------------------------------------------------------------------
 		Vector2 operator*(const Vector2& target);
@@ -121,12 +126,19 @@ namespace Reyadhah
 		Vector2 operator/(const float value);
 		void operator/=(const float value);
 
-		//Equality ------------------------------------------------------------------------
+		//Boolean -------------------------------------------------------------------------
 		bool operator==(const Vector2& target);
 		bool operator!=(const Vector2& target);
 
+		//Logical -------------------------------------------------------------------------
+		Vector2 operator&&(const Vector2& target); //For trial
+		Vector2 operator||(const Vector2& target); //For trial
+
 		//Assignment ----------------------------------------------------------------------
 		Vector2 operator=(const Vector2& target);
+
+		//Array ---------------------------------------------------------------------------
+		float operator[](int index);
 		// ================================================================================
 
 		//Static Properties ===============================================================

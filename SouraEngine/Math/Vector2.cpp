@@ -100,6 +100,20 @@ namespace Reyadhah
 		CalculateFields();
 	}
 
+	void Vector2::operator++()
+	{
+		++this->x;
+		++this->y;
+		CalculateFields();
+	}
+
+	void Vector2::operator++(int)
+	{
+		this->x++;
+		this->y++;
+		CalculateFields();
+	}
+
 	Vector2 Vector2::operator-(const Vector2 & target)
 	{
 		return Vector2(this->x - target.x, this->y - target.y);
@@ -109,6 +123,20 @@ namespace Reyadhah
 	{
 		this->x -= target.x;
 		this->y -= target.y;
+		CalculateFields();
+	}
+
+	void Vector2::operator--()
+	{
+		this->x--;
+		this->y--;
+		CalculateFields();
+	}
+
+	void Vector2::operator--(int)
+	{
+		--this->x;
+		--this->y;
 		CalculateFields();
 	}
 
@@ -170,9 +198,31 @@ namespace Reyadhah
 		return this->x != target.x || this->y != target.y;
 	}
 
+	Vector2 Vector2::operator&&(const Vector2 & target)
+	{
+		return Vector2(this->x && target.x, this->y && target.y);
+	}
+
+	Vector2 Vector2::operator||(const Vector2 & target)
+	{
+		return Vector2(this->x || target.x, this->y || target.y);
+	}
+
 	Vector2 Vector2::operator=(const Vector2 & target)
 	{
 		return Vector2(this->x = target.x, this->y = target.y);
+	}
+
+	float Vector2::operator[](int index)
+	{
+		switch (index)
+		{
+		default:
+		case 0:
+			return x;
+		case 1:
+			return y;
+		}
 	}
 
 	Vector2 Vector2::normalized() const

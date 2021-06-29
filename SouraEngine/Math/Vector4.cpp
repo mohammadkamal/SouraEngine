@@ -86,6 +86,23 @@ namespace Reyadhah
 		this->y += target.y;
 		this->z += target.z;
 		this->w += target.w;
+		CalculateFields();
+	}
+	void Vector4::operator++()
+	{
+		++this->x;
+		++this->y;
+		++this->z;
+		++this->w;
+		CalculateFields();
+	}
+	void Vector4::operator++(int)
+	{
+		this->x++;
+		this->y++;
+		this->z++;
+		this->w++;
+		CalculateFields();
 	}
 	Vector4 Vector4::operator-(const Vector4 & target)
 	{
@@ -97,6 +114,23 @@ namespace Reyadhah
 		this->y -= target.y;
 		this->z -= target.z;
 		this->w -= target.w;
+		CalculateFields();
+	}
+	void Vector4::operator--()
+	{
+		--this->x;
+		--this->y;
+		--this->z;
+		--this->w;
+		CalculateFields();
+	}
+	void Vector4::operator--(int)
+	{
+		this->x--;
+		this->y--;
+		this->z--;
+		this->w--;
+		CalculateFields();
 	}
 	Vector4 Vector4::operator*(const Vector4 & target)
 	{
@@ -108,6 +142,7 @@ namespace Reyadhah
 		this->y *= target.y;
 		this->z *= target.z;
 		this->w *= target.w;
+		CalculateFields();
 	}
 	Vector4 Vector4::operator*(const float value)
 	{
@@ -119,6 +154,7 @@ namespace Reyadhah
 		this->y *= value;
 		this->z *= value;
 		this->w *= value;
+		CalculateFields();
 	}
 	Vector4 Vector4::operator/(const Vector4 & target)
 	{
@@ -130,6 +166,7 @@ namespace Reyadhah
 		this->y /= target.y;
 		this->z /= target.z;
 		this->w /= target.w;
+		CalculateFields();
 	}
 	Vector4 Vector4::operator/(const float value)
 	{
@@ -141,6 +178,7 @@ namespace Reyadhah
 		this->y /= value;
 		this->z /= value;
 		this->w /= value;
+		CalculateFields();
 	}
 	bool Vector4::operator==(const Vector4 & target)
 	{
@@ -150,9 +188,32 @@ namespace Reyadhah
 	{
 		return this->x != target.x || this->y != target.y || this->z != target.z || this->w != target.w;
 	}
+	Vector4 Vector4::operator&&(const Vector4 & target)
+	{
+		return Vector4(this->x && target.x, this->y && target.y, this->z && target.z, this->w && target.w);
+	}
+	Vector4 Vector4::operator||(const Vector4 & target)
+	{
+		return Vector4(this->x || target.x, this->y || target.y, this->z || target.z, this->w || target.w);
+	}
 	Vector4 Vector4::operator=(const Vector4 & target)
 	{
 		return Vector4(target.x, target.y, target.z, target.w);
+	}
+	float Vector4::operator[](int index)
+	{
+		switch (index)
+		{
+		default:
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		case 3:
+			return w;
+		}
 	}
 	Vector4 Vector4::normalized() const
 	{
